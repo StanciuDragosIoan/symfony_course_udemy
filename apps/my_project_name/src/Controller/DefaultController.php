@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\User;
 
 class DefaultController extends AbstractController
 {
@@ -13,8 +14,35 @@ class DefaultController extends AbstractController
      */
     public function index()
     {   
-        $users = [ 'Adam', 'Robert', 'John', 'Jack'];
+        // $users = [ 'Adam', 'Robert', 'John', 'Jack'];
 
+
+        //create users and add the to DB
+        // $entityManager = $this->getDoctrine()->getManager();
+
+        // $user = new User();
+        // $user->setName('Adam');
+
+        // $user2 = new User();
+        // $user2->setName('Robert');
+
+        // $user3 = new User();
+        // $user3->setName('John');
+
+        // $user4 = new User();
+        // $user4->setName('Susan');
+        // //prepare to save to DB
+        // $entityManager->persist($user);
+        // $entityManager->persist($user2);
+        // $entityManager->persist($user3);
+        // $entityManager->persist($user4);
+        // //save to DB
+        // $entityManager->flush();
+
+
+        //fetch users from DB 
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => $users
