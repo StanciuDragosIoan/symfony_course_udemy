@@ -7,6 +7,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Services\GiftsService;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 class DefaultController extends AbstractController
 {   
@@ -20,7 +24,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/default", name="default")
      */
-    public function index(GiftsService $gifts)
+    public function index(GiftsService $gifts, Request $request, SessionInterface $session)
     {   
         // $users = [ 'Adam', 'Robert', 'John', 'Jack'];
 
@@ -50,6 +54,26 @@ class DefaultController extends AbstractController
 
         //fetch users from DB 
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        // exit($request->cookies->get('PHPSESSID'));
+        
+
+        //create session
+        $session->set('name', 'session value');
+
+        //clear session
+        $session->remove('name');
+
+
+
+        //clears the entire session data not only a specific entry with a give name
+        // $session->clear();  
+
+        //check for session data and display it if it exists
+        if($session->has('name'))
+        {
+            exit($session->get('name'));
+        }
+       
 
         //the 2 lines below have been moved to the GiftsService;
         // $gifts = ['flowers', 'car', 'piano', 'money'];
@@ -72,14 +96,38 @@ class DefaultController extends AbstractController
             'Your Changes were saved'
         );
 
-
-
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => $users,
             'random_gift' => $gifts->gifts
         ]);
 
+        
+
+         //create cookie
+        //  $cookie = new Cookie(
+        //     'my_cookie',  //name
+        //     'cookie value',  //value
+        //     time() + (2*365*24*60*60)  //expiration time (after 2 yrs in this case)
+        // );
+
+        // create new response, attach cookie to headers and send response to browser
+        // $res =  new Response();
+        // $res->headers->setCookie($cookie);
+        // $res->send();
+
+
+        //remove cookie
+        // $res = new Response();
+        // $res->headers->clearCookie('my_cookie');
+        // $res->send();
+
+      
+
+     
+
+
+      
 
         //return JSON
         // return $this->json(
