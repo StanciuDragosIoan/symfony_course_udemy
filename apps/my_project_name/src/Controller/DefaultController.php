@@ -57,11 +57,21 @@ class DefaultController extends AbstractController
         // exit($request->cookies->get('PHPSESSID'));
         
 
+
+        //get request data
+        // exit($request->query->get('page', 'default'));
+
+        //get server data
+        // exit($request->server->get('HTTP_HOST'));
+        // $request->isXmlHttpRequest();//check whether the request is ajax or not
+        // $request->request->get('page'); //get post data
+        // $request->file->get('foo'); //get the 'foo' uploaded file
+
         //create session
-        $session->set('name', 'session value');
+        // $session->set('name', 'session value');
 
         //clear session
-        $session->remove('name');
+        // $session->remove('name');
 
 
 
@@ -69,10 +79,10 @@ class DefaultController extends AbstractController
         // $session->clear();  
 
         //check for session data and display it if it exists
-        if($session->has('name'))
-        {
-            exit($session->get('name'));
-        }
+        // if($session->has('name'))
+        // {
+        //     exit($session->get('name'));
+        // }
        
 
         //the 2 lines below have been moved to the GiftsService;
@@ -84,17 +94,17 @@ class DefaultController extends AbstractController
         // Flash Mesages
 
         //display only 1 flash
-        $this->addFlash(
-            'notice',
-            'Your Changes were saved'
-        );
+        // $this->addFlash(
+        //     'notice',
+        //     'Your Changes were saved'
+        // );
 
 
         //display all flashes
-        $this->addFlash(
-            'warning',
-            'Your Changes were saved'
-        );
+        // $this->addFlash(
+        //     'warning',
+        //     'Your Changes were saved'
+        // );
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
