@@ -319,4 +319,32 @@ class DefaultController extends AbstractController
             exit("TEst controlelr forwarding - ".$param);
        }
 
+
+       /**
+        * @Route("/page", name="default")
+        */
+       public function twigExtra(Request $request)
+       {
+        //fetch users from DB 
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        return $this->render('default/indexExtra.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => $users
+        ]);
+       }
+
+
+       /**
+        * @Route("/home", name="home")
+        */
+        public function home(Request $request)
+        {
+         //fetch users from DB 
+         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+         return $this->render('default/indexExtra.html.twig', [
+             'controller_name' => 'DefaultController',
+             'users' => $users
+         ]);
+        }
+
 }
