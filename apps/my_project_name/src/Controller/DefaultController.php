@@ -347,4 +347,18 @@ class DefaultController extends AbstractController
          ]);
         }
 
+
+
+
+       /**
+        * @Route("/test-jq", name="home")
+        */
+        public function home2(Request $request)
+        {
+         //fetch users from DB 
+         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+         return $this->render('default/index-jq.html.twig');
+        }
+
+
 }
