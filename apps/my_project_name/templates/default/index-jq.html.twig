@@ -26,7 +26,12 @@
     </ul>
 
    
+    {{app.user}} <!-- returns null as I am not authenticated-->
+    {{app.request.get('param')}}  
 
+    {{dump(app.environment)}};
+    {{dump(app.session)}};
+ 
     
 </div>
 {% endblock %}
