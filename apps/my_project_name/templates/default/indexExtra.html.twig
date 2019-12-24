@@ -53,6 +53,12 @@
     {{ga_code}}
 </p>
 
+
+{{render(controller(
+    'App\\Controller\\DefaultController::mostPopularPosts',
+    { 'number' : 5}
+))}}
+
 {{ asset('images/logo.png') }}
 {% endblock %}
  {% block javascripts %}

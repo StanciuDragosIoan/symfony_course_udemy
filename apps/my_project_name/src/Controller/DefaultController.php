@@ -337,7 +337,7 @@ class DefaultController extends AbstractController
        /**
         * @Route("/home", name="home")
         */
-        public function home(Request $request)
+        public function home22(Request $request)
         {
          //fetch users from DB 
          $users = $this->getDoctrine()->getRepository(User::class)->findAll();
@@ -346,6 +346,34 @@ class DefaultController extends AbstractController
              'users' => $users
          ]);
         }
+
+
+           /**
+        * @Route("/home2", name="home2")
+        */
+        public function home5(Request $request)
+        {
+         //fetch users from DB 
+
+        
+         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+         return $this->render('default/indexExtra.html.twig',[
+             'controller_name' => 'test'
+         ] );
+        }
+
+        public function mostPopularPosts($number = 3){
+            //query DB
+
+            $posts = ['post 1', 'post 2', 'post 3', 'post 4'];
+
+            return $this->render('default/posts.html.twig', [
+                'posts' => $posts
+            ]);
+        }
+
+
+        // public function
 
 
 
