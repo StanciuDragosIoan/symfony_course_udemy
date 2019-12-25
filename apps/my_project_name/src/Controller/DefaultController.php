@@ -353,9 +353,25 @@ class DefaultController extends AbstractController
         */
         public function home5(Request $request)
         {
-         //fetch users from DB 
 
-        
+
+         //get entity manager who'll save data into the DB
+         $entityManager = $this->getDoctrine()->getManager();   
+
+         //create new user
+         $user = new User();
+         $user->setName('Robert_test_create');
+
+         //prepare data to be saved into the DB
+         $entityManager->persist($user);
+
+         //save data into DB
+         $entityManager->flush();
+
+         //test if data saved
+         dump('A new user was saved with the id of ' . $user->getId());
+
+         //fetch users from DB   
          $users = $this->getDoctrine()->getRepository(User::class)->findAll();
          return $this->render('default/indexExtra.html.twig',[
              'controller_name' => 'test'
