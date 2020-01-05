@@ -371,12 +371,31 @@ class DefaultController extends AbstractController
          //test if data saved
          dump('A new user was saved with the id of ' . $user->getId());
 
+
+       
          //fetch users from DB   
-         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+         
+        //read data from doctrine
+        $repository = $this->getDoctrine()->getRepository(User::class);
+                    //search by id
+         $user2 = $repository->find(6);
+            //search by a certain table column
+         $user2 =  $repository->findOneBy(["name" => "name - 0"]);
+        // dump($user2);
+
+         //search by descending id (multiple records)
+         $user2 =  $repository->findBy(["name" => "Robert_test_create"], ["id" => "DESC"]);
+         dump($user2);
+         die();
+         
          return $this->render('default/indexExtra.html.twig',[
              'controller_name' => 'test'
          ] );
+
         }
+
+       
 
         public function mostPopularPosts($number = 3){
             //query DB
