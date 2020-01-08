@@ -386,8 +386,30 @@ class DefaultController extends AbstractController
 
          //search by descending id (multiple records)
          $user2 =  $repository->findBy(["name" => "Robert_test_create"], ["id" => "DESC"]);
-         dump($user2);
-         die();
+         
+         //define id, find user by id and change its name
+        //  $id = 1;
+        //  $user = $entityManager->getRepository(User::class)->find($id);
+ 
+        //  if (!$user)
+        //  {
+        //      throw $this->createNotFoundException(
+        //          'No user found for id '.$id
+        //      );
+        //  }
+        //  $user->setName('New user name!');
+        //  $entityManager->flush();
+            
+
+        //find user and delete
+        // $id = 2;
+        // $user = $entityManager->getRepository(User::class)->find($id);
+
+        // $entityManager->renove($user);
+        // $entityManager->flush();
+        //  dump($user); //this will throw error as user in line 406 does not exist once deleted
+        
+  
          
          return $this->render('default/indexExtra.html.twig',[
              'controller_name' => 'test'
