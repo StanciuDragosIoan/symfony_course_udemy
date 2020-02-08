@@ -348,9 +348,9 @@ class DefaultController extends AbstractController
         }
 
 
-           /**
-        * @Route("/home2", name="home2")
-        */
+        /**
+          * @Route("/home2", name="home2")
+          */
         public function home5(Request $request)
         {
 
@@ -418,6 +418,9 @@ class DefaultController extends AbstractController
         }
 
        
+        /**
+          * @Route("/popularPosts", name="popularPosts")
+          */
 
         public function mostPopularPosts($number = 3){
             //query DB
@@ -430,7 +433,31 @@ class DefaultController extends AbstractController
         }
 
 
-        // public function
+        /**
+          * @Route("/doctrine-raw-queries", name="doctrine-raw-queries")
+          */
+        public function doctrineRawQueries(Request $request)
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $conn = $entityManager->getConnection();
+
+            $sql = '
+                SELECT * from user u
+                WHERE u.id < :id
+            ';  
+
+            $stmt = $conn->prepare($sql);
+            //execute statement with 3 as :id param
+            $stmt->execute(['id' => '3']);
+
+            dump($stmt->fetchAll());
+
+            return $this->render('default/defaultTemplate.html.twig', 
+                ['controller_name' => 'DefaultController']
+            );
+
+        }
 
 
 
